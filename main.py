@@ -97,6 +97,6 @@ while True:
     elif opcion =="1":
         agregar_pais(paises)
 
-        
+    print(paises)    
     print("Funcionalidad en desarrollo")
 
