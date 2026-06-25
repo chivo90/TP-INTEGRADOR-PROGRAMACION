@@ -131,4 +131,3 @@ while True:
         buscar_pais(paises)    
 >>>>>>> Stashed changes
     print("Funcionalidad en desarrollo")
-
