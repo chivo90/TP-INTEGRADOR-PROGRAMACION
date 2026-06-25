@@ -38,6 +38,44 @@ def mostrar_menu():
 def validar_opcion(opcion):
     return opcion in ["0","1","2", "3", "4", "5", "6"]
 
+def agregar_pais(paises):
+
+    nombre = input("Ingrese el nombre del pais: ").strip()
+
+    while nombre == "":
+        print("Error: El nombre no puede estar vacio.")
+        nombre = input("Ingrese el nombre del pais: ").strip()
+
+    poblacion = int(input("Ingrese poblacion: "))
+
+    while poblacion <=0:
+        print("Error: Debe ser mayor que 0")
+        poblacion = int(input("Ingrese poblacion: "))
+
+    superficie = int(input("Ingrese superficie: "))
+
+    while superficie <=0:
+        print("Error: Debe ser mayor que 0")
+        superficie = int(input("Ingrese superficie: "))
+
+    continente = input("Ingrese continente: ").strip()
+
+    while continente =="":
+        print("Error: El continente no puede estar vacio")
+        continente = input("Ingrese continente: ").strip()
+
+    
+    nuevo_pais = {
+        "nombre": nombre,
+        "poblacion": poblacion,
+        "superficie": superficie,
+        "continente": continente
+    }
+
+    paises.append(nuevo_pais)
+
+    print("Pais agregado correctamente")
+
 paises = cargar_paises("paises.csv")
 
 for pais in paises:
@@ -55,6 +93,10 @@ while True:
     if opcion == 0:
         print("Fin del programa")
         break
+    
+    elif opcion =="1":
+        agregar_pais(paises)
 
+        
     print("Funcionalidad en desarrollo")
 
