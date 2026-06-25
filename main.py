@@ -76,6 +76,33 @@ def agregar_pais(paises):
 
     print("Pais agregado correctamente")
 
+def buscar_pais(paises):
+
+    nombre_buscado = input("Ingrese el nombre del pais: ").strip().lower()
+
+    encontrados = []
+
+    for pais in paises:
+
+        if nombre_buscado in pais["nombre"].lower():
+            encontrados.append(pais)
+        
+    if len(encontrados) ==0:
+        print("No se encontraron paises.")
+
+    else:
+        print("\nResultados encontrados:\n")
+
+        for pais in encontrados:
+
+            print(
+                f"nombre: {pais['nombre']} | "
+                f"Poblacion: {pais['poblacion']} | "
+                f"Superficie: {pais['superficie']} km² | "
+                f"Continente: {pais['continente']}"
+            )
+        
+
 paises = cargar_paises("paises.csv")
 
 for pais in paises:
@@ -97,6 +124,11 @@ while True:
     elif opcion =="1":
         agregar_pais(paises)
 
+<<<<<<< Updated upstream
     print(paises)    
+=======
+    elif opcion =="3":
+        buscar_pais(paises)    
+>>>>>>> Stashed changes
     print("Funcionalidad en desarrollo")
 
