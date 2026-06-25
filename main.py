@@ -123,11 +123,9 @@ while True:
     
     elif opcion =="1":
         agregar_pais(paises)
-
-<<<<<<< Updated upstream
-    print(paises)    
-=======
+    
     elif opcion =="3":
         buscar_pais(paises)    
->>>>>>> Stashed changes
+
     print("Funcionalidad en desarrollo")
+
