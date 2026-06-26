@@ -40,30 +40,59 @@ def validar_opcion(opcion):
 
 def agregar_pais(paises):
 
-    nombre = input("Ingrese el nombre del pais: ").strip()
+    while True:
+        try:
 
-    while nombre == "":
-        print("Error: El nombre no puede estar vacio.")
-        nombre = input("Ingrese el nombre del pais: ").strip()
+            nombre = input("Ingrese el nombre del pais: ").strip()
 
-    poblacion = int(input("Ingrese poblacion: "))
+            if nombre == "":
+                raise ValueError
 
-    while poblacion <=0:
-        print("Error: Debe ser mayor que 0")
-        poblacion = int(input("Ingrese poblacion: "))
+            break
 
-    superficie = int(input("Ingrese superficie: "))
+        except ValueError:
+            print("Error: El nombre no puede estar vacio.")
 
-    while superficie <=0:
-        print("Error: Debe ser mayor que 0")
-        superficie = int(input("Ingrese superficie: "))
+    
+    while True:
+        try:
+            
+            poblacion = int(input("Ingrese poblacion: "))
 
-    continente = input("Ingrese continente: ").strip()
+            if poblacion <=0:
+                raise ValueError
+            
+            break
 
-    while continente =="":
-        print("Error: El continente no puede estar vacio")
-        continente = input("Ingrese continente: ").strip()
+        except ValueError:
+            print("Error: Ingrese un numero mayor que 0.")
 
+    while True:
+        try:
+            
+            superficie = int(input("Ingrese superficie: "))
+
+            if superficie <=0:
+                raise ValueError
+            
+            break
+
+        except ValueError:
+            print("Error: Ingrese un numero mayor que 0.")
+
+    while True:
+        try:
+            
+            continente = input("Ingrese continente: ").strip()
+
+            if continente =="":
+                raise ValueError
+        
+            break
+
+        except ValueError:
+            print("Error: Ingrese un numero mayor que 0.")
+        
     
     nuevo_pais = {
         "nombre": nombre,
@@ -76,21 +105,34 @@ def agregar_pais(paises):
 
     print("Pais agregado correctamente")
 
+
 def buscar_pais(paises):
 
-    nombre_buscado = input("Ingrese el nombre del pais: ").strip().lower()
+    while True:
+        try:
+
+            nombre_buscado = input("Ingrese el nombre del pais: ").strip()
+
+            if nombre_buscado == "":
+                raise ValueError
+            
+            break
+
+        except ValueError:
+            print("Error: Debe ingresar un nombre.")
 
     encontrados = []
 
     for pais in paises:
 
-        if nombre_buscado in pais["nombre"].lower():
+        if nombre_buscado.lower() in pais["nombre"].lower():
             encontrados.append(pais)
         
     if len(encontrados) ==0:
         print("No se encontraron paises.")
 
     else:
+
         print("\nResultados encontrados:\n")
 
         for pais in encontrados:
@@ -102,6 +144,64 @@ def buscar_pais(paises):
                 f"Continente: {pais['continente']}"
             )
         
+def actualizar_pais(paises):
+
+    while True:
+
+        try:
+
+            nombre = input("Ingrese el nombre del pais a actualizar: ").strip().lower()
+
+            if nombre =="":
+                raise ValueError
+            
+            break
+
+        except ValueError:
+            print("Error: Debe ingresar  un nombre de pais.")
+
+    for pais in paises:
+
+        if pais["nombre"].lower() == nombre.lower():
+
+            print("\nPaís encontrado")
+            print(f"Nombre: {pais['nombre']}")
+            print(f"Población actual: {pais['poblacion']}")
+            print(f"Superficie actual: {pais['superficie']}")
+        
+        while True:
+
+            try:
+
+                poblacion = int(input("Ingrese nueva poblacion: "))
+
+                if poblacion <=0:
+                    raise ValueError
+                
+                pais["poblacion"] = poblacion
+                break
+
+            except ValueError:
+                print("Error: Ingrese un numero entero mayor que 0.")
+
+        while True:
+
+            try:
+                superficie = int(input("Nueva superficie: "))
+
+                if superficie <= 0:
+                    raise ValueError
+                
+                pais['superficie'] = superficie
+                break
+
+            except ValueError:
+                print("Error: Ingrese un numero entero mayor que 0.")
+        print(pais)
+        print("Pais encontrado correctamente.")
+        return    
+
+    print("No se encontro el pais.")
 
 paises = cargar_paises("paises.csv")
 
@@ -124,10 +224,24 @@ while True:
     elif opcion =="1":
         agregar_pais(paises)
 
-<<<<<<< Updated upstream
-    print(paises)    
-=======
+    elif opcion =="2":
+        actualizar_pais(paises)
+
     elif opcion =="3":
         buscar_pais(paises)    
->>>>>>> Stashed changes
-    print("Funcionalidad en desarrollo")
+    
+    elif opcion == "4":
+        print("Opcion en desarrollo")
+
+    elif opcion == "5":
+        print("Opcion en desarrollo")
+
+    elif opcion == "6":
+        print("Opcion en desarrollo")
+
+    elif opcion == "":
+        print("Fin del programa.")
+        break
+
+    else:
+        print("Opcion invalida.")
