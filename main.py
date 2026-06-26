@@ -1,6 +1,6 @@
-print("Sistema de Gestion de Paises")
-
 import csv
+
+print("Sistema de Gestion de Paises")
 
 def cargar_paises(nombre_archivo):
     paises = []
@@ -91,7 +91,7 @@ def agregar_pais(paises):
             break
 
         except ValueError:
-            print("Error: Ingrese un numero mayor que 0.")
+            print("Error: El continente no puede estar vacio.")
         
     
     nuevo_pais = {
@@ -168,38 +168,38 @@ def actualizar_pais(paises):
             print(f"Nombre: {pais['nombre']}")
             print(f"Población actual: {pais['poblacion']}")
             print(f"Superficie actual: {pais['superficie']}")
-        
-        while True:
 
-            try:
+            while True:
 
-                poblacion = int(input("Ingrese nueva poblacion: "))
+                try:
 
-                if poblacion <=0:
-                    raise ValueError
-                
-                pais["poblacion"] = poblacion
-                break
+                    poblacion = int(input("Ingrese nueva poblacion: "))
 
-            except ValueError:
-                print("Error: Ingrese un numero entero mayor que 0.")
+                    if poblacion <= 0:
+                        raise ValueError
+                    
+                    pais["poblacion"] = poblacion
+                    break
 
-        while True:
+                except ValueError:
+                    print("Error: Ingrese un numero entero mayor que 0.")
 
-            try:
-                superficie = int(input("Nueva superficie: "))
+            while True:
 
-                if superficie <= 0:
-                    raise ValueError
-                
-                pais['superficie'] = superficie
-                break
+                try:
+                    superficie = int(input("Nueva superficie: "))
 
-            except ValueError:
-                print("Error: Ingrese un numero entero mayor que 0.")
-        print(pais)
-        print("Pais encontrado correctamente.")
-        return    
+                    if superficie <= 0:
+                        raise ValueError
+                    
+                    pais['superficie'] = superficie
+                    break
+
+                except ValueError:
+                    print("Error: Ingrese un numero entero mayor que 0.")
+
+            print("Pais actualizado correctamente.")
+            return
 
     print("No se encontro el pais.")
 
@@ -338,9 +338,6 @@ def menu_filtros(paises):
 
 paises = cargar_paises("paises.csv")
 
-for pais in paises:
-    print(pais)
-
 while True:
     mostrar_menu()
 
@@ -374,6 +371,3 @@ while True:
 
     else:
         print("Opcion invalida.")
-
-    
-    
