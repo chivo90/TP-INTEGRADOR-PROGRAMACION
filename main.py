@@ -217,13 +217,13 @@ while True:
         print("Error: Opcion invalida")
         continue
 
-    if opcion == 0:
+    if opcion == "0":
         print("Fin del programa")
         break
     
     elif opcion =="1":
         agregar_pais(paises)
-
+        
     elif opcion =="2":
         actualizar_pais(paises)
 
@@ -239,9 +239,8 @@ while True:
     elif opcion == "6":
         print("Opcion en desarrollo")
 
-    elif opcion == "":
-        print("Fin del programa.")
-        break
-
     else:
         print("Opcion invalida.")
+
+    
+    
