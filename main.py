@@ -203,6 +203,139 @@ def actualizar_pais(paises):
 
     print("No se encontro el pais.")
 
+def mostrar_menu_filtros():
+
+    print("\n---FILTROS---")
+    print("1. Filtrar por continente.")
+    print("2. Filtrar por poblacion minima.")
+    print("3. Filtrar por superficie minima.")
+    print("0. Volver.")
+
+def filtrar_continente(paises):
+
+    while True:
+
+        try:
+
+            continente = input("Ingrese el continente: ").strip()
+
+            if continente == "":
+                raise ValueError
+            
+            break
+
+        except ValueError:
+            print("Error: Debe ingresar un continente.")
+
+    encontrados = False
+
+    print("\nPaises encontrados:\n")
+
+    for pais in paises:
+
+        if pais["continente"].lower() == continente.lower():
+
+            print(f"{pais['nombre']} - {pais['continente']}")
+            encontrados = True
+
+    if not encontrados:
+        print("No se encontraron paises")
+
+def filtrar_poblacion(paises):
+
+    while True:
+
+        try:
+
+            minimo = int(input("Ingrese la población mínima: "))
+
+            if minimo <= 0:
+                raise ValueError
+
+            break
+
+        except ValueError:
+
+            print("Error: ingrese un número entero mayor que 0.")
+
+    encontrados = False
+
+    print("\nPaíses encontrados:\n")
+
+    for pais in paises:
+
+        if pais["poblacion"] >= minimo:
+
+            print(f"{pais['nombre']} - {pais['poblacion']} habitantes")
+            encontrados = True
+
+    if not encontrados:
+
+        print("No se encontraron países.")
+
+def filtrar_superficie(paises):
+
+    while True:
+
+        try:
+
+            minimo = int(input("Ingrese la superficie mínima: "))
+
+            if minimo <= 0:
+                raise ValueError
+
+            break
+
+        except ValueError:
+
+            print("Error: ingrese un número entero mayor que 0.")
+
+    encontrados = False
+
+    print("\nPaíses encontrados:\n")
+
+    for pais in paises:
+
+        if pais["superficie"] >= minimo:
+
+            print(f"{pais['nombre']} - {pais['superficie']} km²")
+            encontrados = True
+
+    if not encontrados:
+
+        print("No se encontraron países.")
+
+def menu_filtros(paises):
+
+    while True:
+
+        mostrar_menu_filtros()
+
+        try:
+
+            opcion = input("Seleccione una opcion: ").strip()
+
+            if opcion not in  ["0", "1",  "2", "3"]:
+                raise ValueError
+            
+            if opcion == "1":
+                filtrar_continente(paises)
+
+            elif opcion == "2":
+                filtrar_poblacion(paises)
+
+            elif opcion == "3":
+                filtrar_superficie(paises)
+
+            elif opcion == "0":
+                print("Volviendo al menú principal...")
+                break
+
+        except ValueError:
+
+            print("Error: opción inválida. Intente nuevamente.")
+                
+
 paises = cargar_paises("paises.csv")
 
 for pais in paises:
@@ -231,7 +364,7 @@ while True:
         buscar_pais(paises)    
     
     elif opcion == "4":
-        print("Opcion en desarrollo")
+        menu_filtros(paises)
 
     elif opcion == "5":
         print("Opcion en desarrollo")
