@@ -201,7 +201,7 @@ def filtrar_poblacion(paises):
         except ValueError:
             print("Error: ingrese un numero entero mayor que 0.")
 
-    # NUEVO: pide el maximo y valida que sea mayor al minimo
+    # pedimos el maximo y verificamos que sea mayor al minimo
     while True:
         try:
             maximo = int(input("Ingrese la poblacion maxima: ").strip())
@@ -217,7 +217,7 @@ def filtrar_poblacion(paises):
 
     for pais in paises:
 
-        # MODIFICADO: ahora filtra por rango (minimo Y maximo)
+        # filtramos por rango, tiene que estar entre los dos valores
         if pais["poblacion"] >= minimo and pais["poblacion"] <= maximo:
             print(f"{pais['nombre']} - {pais['poblacion']} habitantes")
             encontrados = True
@@ -236,7 +236,7 @@ def filtrar_superficie(paises):
         except ValueError:
             print("Error: ingrese un numero entero mayor que 0.")
 
-    # NUEVO: pide el maximo y valida que sea mayor al minimo
+    # mismo criterio que poblacion, el maximo tiene que ser mayor al minimo
     while True:
         try:
             maximo = int(input("Ingrese la superficie maxima: ").strip())
@@ -252,7 +252,6 @@ def filtrar_superficie(paises):
 
     for pais in paises:
 
-        # MODIFICADO: ahora filtra por rango (minimo Y maximo)
         if pais["superficie"] >= minimo and pais["superficie"] <= maximo:
             print(f"{pais['nombre']} - {pais['superficie']} km²")
             encontrados = True
@@ -285,6 +284,113 @@ def menu_filtros(paises):
         except ValueError:
             print("Error: opcion invalida. Intente nuevamente.")
 
+def mostrar_menu_ordenamiento():
+    print("\n--- ORDENAR PAISES ---")
+    print("1. Ordenar por nombre")
+    print("2. Ordenar por poblacion")
+    print("3. Ordenar por superficie")
+    print("0. Volver")
+
+def ordenar_paises(paises, criterio, descendente):
+    # sorted() no modifica la lista original, devuelve una nueva
+    return sorted(paises, key=lambda pais: pais[criterio], reverse=descendente)
+
+def menu_ordenamiento(paises):
+
+    while True:
+
+        mostrar_menu_ordenamiento()
+
+        try:
+            opcion = input("Seleccione una opcion: ").strip()
+
+            if opcion not in ["0", "1", "2", "3"]:
+                raise ValueError
+
+            if opcion == "0":
+                print("Volviendo al menu principal...")
+                break
+
+            # mapeamos la opcion a la clave del diccionario
+            if opcion == "1":
+                criterio = "nombre"
+            elif opcion == "2":
+                criterio = "poblacion"
+            elif opcion == "3":
+                criterio = "superficie"
+
+            # preguntamos el orden
+            orden = input("Orden: (A)scendente o (D)escendente? ").strip().upper()
+
+            if orden not in ["A", "D"]:
+                print("Error: ingrese A o D.")
+                continue
+
+            descendente = orden == "D"
+
+            resultado = ordenar_paises(paises, criterio, descendente)
+
+            print("\nResultado:\n")
+            for pais in resultado:
+                print(
+                    f"{pais['nombre']} | "
+                    f"Poblacion: {pais['poblacion']} | "
+                    f"Superficie: {pais['superficie']} km² | "
+                    f"Continente: {pais['continente']}"
+                )
+
+        except ValueError:
+            print("Error: opcion invalida. Intente nuevamente.")
+
+def mostrar_estadisticas(paises):
+
+    # verificamos que haya datos antes de calcular
+    if len(paises) == 0:
+        print("No hay paises cargados.")
+        return
+
+    # pais con mayor y menor poblacion
+    mayor_pob = paises[0]
+    menor_pob = paises[0]
+
+    for pais in paises:
+        if pais["poblacion"] > mayor_pob["poblacion"]:
+            mayor_pob = pais
+        if pais["poblacion"] < menor_pob["poblacion"]:
+            menor_pob = pais
+
+    # promedio de poblacion y superficie
+    total_poblacion = 0
+    total_superficie = 0
+
+    for pais in paises:
+        total_poblacion += pais["poblacion"]
+        total_superficie += pais["superficie"]
+
+    promedio_pob = total_poblacion / len(paises)
+    promedio_sup = total_superficie / len(paises)
+
+    # contamos cuantos paises hay por continente
+    por_continente = {}
+
+    for pais in paises:
+        continente = pais["continente"]
+        if continente in por_continente:
+            por_continente[continente] += 1
+        else:
+            por_continente[continente] = 1
+
+    # mostramos todo
+    print("\n--- ESTADISTICAS ---\n")
+    print(f"Pais con mayor poblacion: {mayor_pob['nombre']} ({mayor_pob['poblacion']} hab.)")
+    print(f"Pais con menor poblacion: {menor_pob['nombre']} ({menor_pob['poblacion']} hab.)")
+    print(f"Promedio de poblacion:    {promedio_pob:.0f} hab.")
+    print(f"Promedio de superficie:   {promedio_sup:.0f} km²")
+    print("\nPaises por continente:")
+
+    for continente, cantidad in por_continente.items():
+        print(f"  {continente}: {cantidad}")
+
 
 paises = cargar_paises("paises.csv")
 
@@ -314,10 +420,10 @@ while True:
         menu_filtros(paises)
 
     elif opcion == "5":
-        print("Opcion en desarrollo")
+        menu_ordenamiento(paises)
 
     elif opcion == "6":
-        print("Opcion en desarrollo")
+        mostrar_estadisticas(paises)
 
     else:
         print("Opcion invalida.")
