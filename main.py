@@ -493,6 +493,7 @@ while True:
     elif opcion == "1":
         agregar_pais(paises)
 
+
     elif opcion == "2":
         actualizar_pais(paises)
 
@@ -510,3 +511,6 @@ while True:
 
     else:
         print("Opcion invalida.")
+
+
+
