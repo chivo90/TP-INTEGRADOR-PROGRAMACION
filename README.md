@@ -13,9 +13,9 @@ Proyecto en desarrollo.
 ## Objetivo
 
 Desarrollar una aplicacion de consola que permita gestionar informacion de paises utilizando: 
-Python
-Archivos CSV
-Listas y diccionarios
+- Python
+- Archivos CSV
+- Listas y diccionarios
 
 ## Funcionalidades
 
