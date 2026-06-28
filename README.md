@@ -20,33 +20,33 @@ Listas y diccionarios
 ## Funcionalidades
 
 El sistema permite:
-Cargar paises desde un archivo CSV
-Agregar nuevos paises
-Buscar paises por nombre
-Actualizar poblacion y superficie
-Filtrar paises:
+- Cargar paises desde un archivo CSV
+- Agregar nuevos paises
+- Buscar paises por nombre
+- Actualizar poblacion y superficie
+- Filtrar paises:
 	* Por nombre
 	* Por poblacion
 	* Por superficie
 	* En orden ascendente o descendente
-Mostrar estadisticas:
+- Mostrar estadisticas:
 	* Pais con mayor y menor poblacion
 	* Promedios de poblacion y superficie
 	* Cantidad de paises por continente
 
 ## Estructura del proyecto
 📁 TP-INTEGRADOR-PROGRAMACION/
-│
-├── paises.csv        # Datos iniciales
-├── main.py           # Programa principal
-└── README.md         # Documentación
+
+- ── paises.csv        # Datos iniciales
+- ── main.py           # Programa principal
+- ── README.md         # Documentación
 
 ## Formato del archivo CSV
 El archivo paises.csv debe respetar el siguiente formato:
-nombre;poblacion;superficie;continente
-Argentina;46000000;2780000;America
-Brasil;214000000;8516000;America
-España;47000000;505000;Europa
+- nombre;poblacion;superficie;continente
+- Argentina;46000000;2780000;America
+- Brasil;214000000;8516000;America
+- España;47000000;505000;Europa
 
 ## Ejecución
 
